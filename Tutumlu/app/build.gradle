@@ -7,6 +7,10 @@ android {
     namespace 'com.tutumluapp.tutumlu'
     compileSdk 33
 
+    viewBinding {
+        enabled = true
+    }
+
     defaultConfig {
         applicationId "com.tutumluapp.tutumlu"
         minSdk 24

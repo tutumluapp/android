@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignUpActivity">
+
+    <include layout="@layout/header"
+        android:id="@+id/hdr_signup"/>
+
+    <TextView
+        android:id="@+id/lbl_tutumlu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="130dp"
+        android:text="TUTUMLU"
+        android:textStyle="bold|italic"
+        android:textAlignment="center"
+        android:textSize="40dp"
+        android:textColor="#3EBD69"
+        tools:layout_editor_absoluteX="124dp"
+        tools:layout_editor_absoluteY="182dp"
+        />
+
+    <EditText
+        android:id="@+id/input_profilename"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/lbl_tutumlu"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:textSize="16dp"
+        android:paddingLeft="15dp"
+        android:inputType="text"
+        android:background="@drawable/field_input"
+        android:hint="Enter profile name..." />
+
+    <EditText
+        android:id="@+id/input_username"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/input_profilename"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:textSize="16dp"
+        android:paddingLeft="15dp"
+        android:inputType="text"
+        android:background="@drawable/field_input"
+        android:hint="Enter username..." />
+
+    <EditText
+        android:id="@+id/input_password"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/input_username"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:textSize="16dp"
+        android:paddingLeft="15dp"
+        android:inputType="textPassword"
+        android:background="@drawable/field_input"
+        android:hint="Enter password..." />
+
+    <EditText
+        android:id="@+id/input_password_again"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/input_password"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:textSize="16dp"
+        android:paddingLeft="15dp"
+        android:inputType="textPassword"
+        android:background="@drawable/field_input"
+        android:hint="Repeat password..." />
+
+    <Button
+        android:id="@+id/btn_signup"
+        android:layout_below="@+id/input_password_again"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/btn_signup"
+        android:layout_centerHorizontal="true"
+        />
+
+
+</RelativeLayout>
