@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_changepsw"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FragmentChangePsw">
+
+    <include layout="@layout/header"
+        android:id="@+id/hdr_changepsw"/>
+
+    <EditText
+        android:id="@+id/input_old_psw"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/hdr_changepsw"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:textSize="16dp"
+        android:paddingLeft="15dp"
+        android:inputType="textPassword"
+        android:background="@drawable/field_input"
+        android:hint="Enter old password..." />
+
+    <EditText
+        android:id="@+id/input_new_psw"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/input_old_psw"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:textSize="16dp"
+        android:paddingLeft="15dp"
+        android:inputType="textPassword"
+        android:background="@drawable/field_input"
+        android:hint="Enter new password..." />
+
+    <EditText
+        android:id="@+id/input_new_psw_again"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/input_new_psw"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:textSize="16dp"
+        android:paddingLeft="15dp"
+        android:inputType="textPassword"
+        android:background="@drawable/field_input"
+        android:hint="Repeat password..." />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/btn_save"
+        android:layout_below="@+id/input_new_psw_again"
+        android:id="@+id/btn_changename"
+        />
+
+</RelativeLayout>

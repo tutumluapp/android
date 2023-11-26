@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/fragment_changename"
+    android:layout_height="match_parent"
+    tools:context=".FragmentChangeName">
+
+    <include layout="@layout/header"
+        android:id="@+id/hdr_changename"/>
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/view_userinfo"
+        android:layout_below="@+id/hdr_changename"
+        android:background="@drawable/field_profilename"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        >
+        <TextView
+            android:id="@+id/lbl_profilename"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Profile Name"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="35dp"
+            android:textSize="24dp"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lbl_profilename"
+            android:id="@+id/lbl_username"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="35dp"
+            tools:text="@string/empty_username"
+            android:textSize="18dp"
+            />
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/input_username"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/view_userinfo"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:textSize="16dp"
+        android:paddingLeft="15dp"
+        android:inputType="text"
+        android:background="@drawable/field_input"
+        android:hint="Enter new profile name..." />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="125dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/btn_save"
+        android:layout_below="@+id/input_username"
+        android:id="@+id/btn_changename"
+        />
+
+</RelativeLayout>
