@@ -17,11 +17,12 @@
         android:textSize="20dp"/>
 
     <TextView
+        android:id="@+id/lbl_price"
         android:layout_marginTop="13dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         tools:text="Price: $2"
-        android:layout_marginRight="10dp"
+        android:layout_marginRight="25dp"
         android:layout_width="wrap_content"
         android:textColor="@color/black"
         android:layout_height="wrap_content"
