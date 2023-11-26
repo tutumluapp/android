@@ -22,6 +22,9 @@ class HomeActivity : AppCompatActivity() {
 
         binding.btnSearch.btnHdr.text = "Search Item"
         binding.btnSearch.btnOptional.setImageResource(R.drawable.logo_search)
+        binding.btnSearch.clickableLayout.setOnClickListener {
+            startActivity(Intent(this, SearchActivity::class.java))
+        }
 
         binding.btnUpload.btnHdr.text = "Upload Slip"
         binding.btnUpload.btnOptional.setImageResource(R.drawable.logo_scan)

@@ -27,13 +27,13 @@ class UploadActivity : AppCompatActivity() {
             startActivity(Intent(this, ProfileActivity::class.java))
         }
 
-        val customItems = arrayOf(
+        val customerItems = arrayOf(
             Product("Item 1", "", 2.5, 1),
             Product("Item 2", "", 2.5, 1),
             Product("Item 3", "", 2.5, 1)
         )
 
-        customItems.forEach {product ->
+        customerItems.forEach {product ->
             binding.llProduct.addView(
                 ProductUploadFieldBinding.inflate(layoutInflater).also {listItem ->
                     listItem.lblItemName.text = product.name
