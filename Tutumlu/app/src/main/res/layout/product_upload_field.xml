@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/field_product_upload"
+    android:id="@+id/product_field">
+
+    <TextView
+        android:id="@+id/lbl_item_name"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="13dp"
+        android:layout_marginLeft="23dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        tools:text="Item 1"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:layout_marginTop="13dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        tools:text="Price: $2"
+        android:layout_marginRight="10dp"
+        android:layout_width="wrap_content"
+        android:textColor="@color/black"
+        android:layout_height="wrap_content"
+        android:textSize="17dp"/>
+
+    <ImageView
+        android:id="@+id/btn_scan"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        tools:background="@drawable/logo_scan_black"
+        android:layout_marginTop="7dp"
+        android:layout_marginLeft="23dp"
+        android:layout_below="@id/lbl_item_name"
+        />
+
+    <TextView
+        android:id="@+id/lbl_scan_info"
+        android:layout_below="@id/lbl_item_name"
+        android:layout_toEndOf="@id/btn_scan"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#545454"
+        android:textSize="16dp"
+        tools:text="Scan barcode"/>
+
+</RelativeLayout>
