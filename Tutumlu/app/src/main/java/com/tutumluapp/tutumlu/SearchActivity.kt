@@ -24,6 +24,11 @@ class SearchActivity : AppCompatActivity() {
             finish()
         }
 
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.frame_search, fragmentSearchName)
+            .addToBackStack(null)
+            .commit()
+
         binding.btnSearchName.setOnClickListener {
             binding.btnSearchName.background = resources.getDrawable(R.drawable.background_clicked)
             binding.btnSearchName.setTextColor(Color.WHITE)

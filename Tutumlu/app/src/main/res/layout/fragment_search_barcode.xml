@@ -1,14 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/fragment_searchbarcode"
     tools:context=".FragmentSearchBarcode">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_search_bar"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:id="@+id/scan_status_bar">
+        <ImageView
+            android:layout_marginLeft="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:srcCompat="@drawable/logo_cross"
+            android:id="@+id/scan_status_logo"/>
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            tools:text="No barcode scanned"
+            android:textSize="19dp"
+            android:id="@+id/scan_status_lbl"/>
+    </LinearLayout>
 
-</FrameLayout>
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="25dp"
+        android:id="@+id/lbl_item_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        tools:text="Item 1's Name"
+        android:layout_below="@id/scan_status_bar"/>
+
+    <ScrollView
+        android:layout_marginTop="14dp"
+        android:id="@+id/view_pricelist_scroll"
+        android:layout_below="@id/lbl_item_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/ll_price_list_barcode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </ScrollView>
+
+    <include layout="@layout/big_button"
+        android:layout_marginBottom="25dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/btn_scan_barcode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>
