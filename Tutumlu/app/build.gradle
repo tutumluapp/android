@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace 'com.tutumluapp.tutumlu'
-    compileSdk 33
+    compileSdk 34
 
     buildFeatures {
         dataBinding true
@@ -18,7 +18,7 @@ android {
     defaultConfig {
         applicationId "com.tutumluapp.tutumlu"
         minSdk 24
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
@@ -41,7 +41,8 @@ android {
 }
 
 dependencies {
-
+    implementation 'com.google.zxing:core'
+    implementation 'com.journeyapps:zxing-android-embedded:4.2.0'
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.6.0'
     implementation 'com.google.android.material:material:1.8.0'

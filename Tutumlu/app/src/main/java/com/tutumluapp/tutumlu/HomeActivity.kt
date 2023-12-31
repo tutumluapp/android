@@ -1,14 +1,19 @@
 package com.tutumluapp.tutumlu
 
+import android.Manifest
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.content.pm.PackageManager
 import android.os.Bundle
-import android.widget.RelativeLayout
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.tutumluapp.tutumlu.databinding.ActivityHomeBinding
+
 
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding:ActivityHomeBinding
+    private val CAMERA_PERMISSION_REQUEST_CODE = 100
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +28,18 @@ class HomeActivity : AppCompatActivity() {
         binding.btnSearch.btnHdr.text = "Search Item"
         binding.btnSearch.btnOptional.setImageResource(R.drawable.logo_search)
         binding.btnSearch.clickableLayout.setOnClickListener {
-            startActivity(Intent(this, SearchActivity::class.java))
+            // Check for camera permission
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+                // Permission is not granted, request it
+                ActivityCompat.requestPermissions(this,
+                    arrayOf(Manifest.permission.CAMERA),
+                    CAMERA_PERMISSION_REQUEST_CODE)
+            } else {
+                startActivity(Intent(this, BarcodeScannerActivity::class.java))
+            }
+
+            //startActivity(Intent(this, SearchActivity::class.java))
         }
 
         binding.btnUpload.btnHdr.text = "Upload Slip"
@@ -34,4 +50,17 @@ class HomeActivity : AppCompatActivity() {
 
         setContentView(binding.root)
     }
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == CAMERA_PERMISSION_REQUEST_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                startActivity(Intent(this, BarcodeScannerActivity::class.java))
+                // Permission granted, proceed with camera operations
+                // Initialize and use the camera here
+            } else {
+                // Permission denied, handle accordingly (e.g., show a message to the user)
+            }
+        }
+    }
+
 }
