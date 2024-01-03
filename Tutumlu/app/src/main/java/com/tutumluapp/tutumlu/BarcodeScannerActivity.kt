@@ -2,7 +2,7 @@ package com.tutumluapp.tutumlu
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
+import android.util.Log
 import com.google.zxing.integration.android.IntentIntegrator
 import com.google.zxing.integration.android.IntentResult
 import com.journeyapps.barcodescanner.CaptureActivity
@@ -19,9 +19,9 @@ class BarcodeScannerActivity : CaptureActivity() {
             productName = intent.getStringExtra("product")
         }
 
-        // Start the barcode scanner
         val integrator = IntentIntegrator(this)
-        integrator.setCaptureActivity(CaptureActivity::class.java) // Use the ZXing CaptureActivity
+        integrator.setCaptureActivity(CaptureActivity::class.java)
+        integrator.setTimeout(20000)
         integrator.initiateScan()
     }
 
@@ -32,8 +32,8 @@ class BarcodeScannerActivity : CaptureActivity() {
 
         if (result != null) {
             if (result.contents != null) {
-                // Handle the scanned barcode value as needed
-                showToast("Scanned Barcode: ${result.contents}")
+
+                Log.i("BarcodeScanner", "Scanned Barcode: ${result.contents}")
 
                 val data = Intent()
                 data.putExtra("product", productName)
@@ -50,9 +50,4 @@ class BarcodeScannerActivity : CaptureActivity() {
             super.onActivityResult(requestCode, resultCode, data)
         }
     }
-
-    private fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-    }
-
 }
