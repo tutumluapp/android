@@ -105,7 +105,7 @@ class UploadActivity : AppCompatActivity() {
                 fisNoToTopkdvText?.split("\n")?.forEach { line ->
                     when {
                         (line.startsWith("*") || line.startsWith("x")) && (!line.startsWith("**") && !line.startsWith("x*") && !line.startsWith("X*") && !line.startsWith("*X")) -> {
-                            val price = line.drop(1).trim().replace(",", ".").replace(" ", "").toDouble()
+                            val price = line.drop(1).trim().replace(",", ".").replace(" ", "").replace("O","0").toDouble()
                             prices.add(price)
                         }
                         line.startsWith("%") -> {
@@ -270,7 +270,7 @@ class UploadActivity : AppCompatActivity() {
                     if (view.tag == scannedProduct?.name) {
                         val listItemBinding = ProductUploadFieldBinding.bind(view)
 
-                        listItemBinding.lblScanInfo.text = "Barcode Scanned!"
+                        listItemBinding.lblScanInfo.text = "Barcode Scanned: " + barcode
                         listItemBinding.btnScan.setImageResource(R.drawable.logo_tick)
                     }
                 }
