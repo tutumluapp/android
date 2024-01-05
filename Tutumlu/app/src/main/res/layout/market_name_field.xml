@@ -6,6 +6,16 @@
     android:background="@drawable/field_market_name"
     android:id="@+id/market_field">
 
+    <Spinner
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="23dp"
+        android:id="@+id/spinner1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/btn_dropdown"
+        android:textColor="@color/black"
+        android:spinnerMode="dropdown"/>
+
     <TextView
         android:layout_marginTop="16dp"
         android:layout_marginLeft="23dp"
@@ -13,6 +23,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/lbl_market_name"
         android:textColor="@color/black"
+        android:visibility="gone"
         tools:text="Market: ŞOK"
         android:textSize="24dp"/>
 

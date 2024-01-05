@@ -1,12 +1,34 @@
 package com.tutumluapp.tutumlu
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.tutumluapp.tutumlu.databinding.ActivityUploadBinding
 import com.tutumluapp.tutumlu.databinding.ProductUploadFieldBinding
+import io.github.jan.supabase.createSupabaseClient
+import io.github.jan.supabase.gotrue.GoTrue
+import io.github.jan.supabase.postgrest.Postgrest
+import io.github.jan.supabase.postgrest.postgrest
+import io.github.jan.supabase.postgrest.query.Columns
+import io.github.jan.supabase.postgrest.query.Order
+import io.github.jan.supabase.postgrest.query.PostgrestResult
+import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
+import kotlinx.serialization.json.longOrNull
+
 
 class UploadActivity : AppCompatActivity() {
     private lateinit var binding:ActivityUploadBinding
@@ -28,6 +50,17 @@ class UploadActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityUploadBinding.inflate(layoutInflater)
         val receiptText = intent.getStringExtra("receipt")
+
+        val spinner = binding.marketNameInfo.spinner1
+
+        val res: Resources = resources
+        val optionsArray: Array<String> = res.getStringArray(R.array.options_array)
+
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, optionsArray)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+        spinner.adapter = adapter
+
 
         val indexOfDate = receiptText?.indexOf("TARIH:")
         val indexOfHour = receiptText?.indexOf("SAAT:")
@@ -59,7 +92,7 @@ class UploadActivity : AppCompatActivity() {
             strToCompare = "FIS NO"
         }
         if(strToCompare != ""){
-            val fisNoLineNumber = lines?.indexOfFirst { it.contains(strToCompare) }?.plus(2)
+            val fisNoLineNumber = lines?.indexOfFirst { it.contains(strToCompare) }?.plus(1)
 
             val topkdvLineNumber = lines?.indexOfFirst { it.contains("TOPKDV") }
 
@@ -153,6 +186,71 @@ class UploadActivity : AppCompatActivity() {
             )*/
         }
 
+        binding.btnUpload.root.setOnClickListener {
+             if( customerItems.any { it.scanStatus == 1 }){
+                 Toast.makeText(this, "Please scan all items", Toast.LENGTH_SHORT).show()
+             }
+            else{
+                 val supabaseUrl = "https://qbpruczdytiwqouzoztl.supabase.co"
+                 val supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFicHJ1Y3pkeXRpd3FvdXpvenRsIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTcxMzE0ODUsImV4cCI6MjAxMjcwNzQ4NX0.aWqvr3-qOnJGQXZwk4GVNVXRnd2OKMOn3fkWF8Pm2UE"
+
+                 val supabase = createSupabaseClient(supabaseUrl, supabaseKey) {
+                     install(GoTrue)
+                     install(Postgrest)
+                 }
+
+                 val prices = supabase.postgrest.from("prices")
+                 val products = supabase.postgrest.from("products")
+                 val scans = supabase.postgrest.from("scans")
+                 val markets = supabase.postgrest.from("markets")
+
+                 @Serializable
+                 data class Scan(
+                     @SerialName("market_id") val market_id: Int
+                 )
+                 @Serializable
+                 data class Price(
+                     @SerialName("product_id") val barcode: String,
+                     @SerialName("scan_id") val scan: Long?,
+                     @SerialName("price") val price: Double
+                 )
+
+                 lifecycleScope.launch {
+
+                     val result = async {
+                         var marketid = 1
+                         if(binding.marketNameInfo.spinner1.selectedItem == "A101"){
+                             marketid = 1
+                         }
+                         else if(binding.marketNameInfo.spinner1.selectedItem == "ŞOK"){
+                             marketid = 2
+                         }
+                         else{
+                             marketid = 3
+                         }
+                         var i : PostgrestResult = scans.insert(Scan(marketid))
+                         var scanQuery : PostgrestResult = scans.select(columns = Columns.list("id")) {
+                             order("id", Order.DESCENDING)
+                             limit(1)
+                         }
+                         var scanList =
+                             scanQuery.body?.jsonArray?.map { it.jsonObject["id"]?.jsonPrimitive?.longOrNull }
+                         val maxScanNum = scanList?.get(0)
+
+                         Log.i("TEST", maxScanNum.toString())
+
+                         customerItems.forEach{item ->
+                             if (maxScanNum != null) {
+                                 prices.insert(Price(item.barcode, maxScanNum, item.price))
+                             }
+                         }
+                         delay(2000)
+                     }
+                     val asyncResult = result.await()
+                     finish()
+                 }
+             }
+        }
 
         setContentView(binding.root)
     }
