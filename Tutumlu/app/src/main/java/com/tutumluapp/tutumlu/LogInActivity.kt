@@ -63,8 +63,10 @@ class LogInActivity : AppCompatActivity() {
                                 val sharedPreferences: SharedPreferences = getSharedPreferences("Credentials", Context.MODE_PRIVATE)
                                 val editor: SharedPreferences.Editor = sharedPreferences.edit()
 
-                                editor.putString("profileName", profile_name.toString())
-                                editor.putString("userName", user_name.toString())
+                                editor.putString("profileName", profile_name.toString()?.replace("\"",""))
+                                editor.putString("userName", user_name.toString()?.replace("\"","")?.replace("@",""))
+                                editor.putString("password",psw)
+                                editor.putString("email",emailUser)
                                 editor.apply()
 
                                 startActivity(Intent(applicationContext, HomeActivity::class.java))
