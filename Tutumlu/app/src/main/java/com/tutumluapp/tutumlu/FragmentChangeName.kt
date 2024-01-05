@@ -96,7 +96,6 @@ class FragmentChangeName : Fragment() {
 
                         editor.putString("profileName", new_name.toString()?.replace("\"",""))
                         editor.apply()
-
                     }
                     val asyncResult = result.await()
                     Toast.makeText(requireContext(),"Change Profile Name Successful", Toast.LENGTH_LONG).show()
