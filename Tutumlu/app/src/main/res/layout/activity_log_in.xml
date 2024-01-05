@@ -36,7 +36,7 @@
         android:paddingLeft="15dp"
         android:inputType="text"
         android:background="@drawable/field_input"
-        android:hint="Enter username..." />
+        android:hint="Enter email..." />
 
     <EditText
         android:id="@+id/input_password"

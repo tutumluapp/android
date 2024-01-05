@@ -244,7 +244,6 @@ class UploadActivity : AppCompatActivity() {
                                  prices.insert(Price(item.barcode, maxScanNum, item.price))
                              }
                          }
-                         delay(2000)
                      }
                      val asyncResult = result.await()
                      finish()

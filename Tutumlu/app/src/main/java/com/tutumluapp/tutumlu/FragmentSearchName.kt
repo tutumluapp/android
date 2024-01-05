@@ -126,7 +126,6 @@ class FragmentSearchName : Fragment() {
                     }
 
                 }
-                delay(2000)
             }
 
             val asyncResult = result.await()

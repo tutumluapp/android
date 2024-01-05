@@ -172,7 +172,6 @@ class FragmentSearchBarcode : Fragment() {
                     }
 
                 }
-                delay(2000)
                 val asyncResult = result.await()
 
             }
